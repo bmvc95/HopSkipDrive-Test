@@ -11,7 +11,9 @@ class MyRidesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Api.myRides.retrieveRides { rides in
+            
+        }
         // Do any additional setup after loading the view.
     }
 }
