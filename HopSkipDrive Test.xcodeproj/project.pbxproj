@@ -103,8 +103,7 @@
 			children = (
 				7796E5A126A7B969008919E8 /* AppDelegate.swift */,
 				7796E5A326A7B969008919E8 /* SceneDelegate.swift */,
-				7796E5A526A7B969008919E8 /* ViewController.swift */,
-				7796E5A726A7B969008919E8 /* Main.storyboard */,
+				7796E5D526A7B9BE008919E8 /* Modules */,
 				7796E5AD26A7B96A008919E8 /* Assets.xcassets */,
 				7796E5AF26A7B96A008919E8 /* LaunchScreen.storyboard */,
 				7796E5B226A7B96A008919E8 /* Info.plist */,
@@ -129,6 +128,23 @@
 				7796E5C826A7B96A008919E8 /* Info.plist */,
 			);
 			path = "HopSkipDrive TestUITests";
+			sourceTree = "<group>";
+		};
+		7796E5D426A7B9B1008919E8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5A526A7B969008919E8 /* ViewController.swift */,
+				7796E5A726A7B969008919E8 /* Main.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		7796E5D526A7B9BE008919E8 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5D426A7B9B1008919E8 /* Main */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
