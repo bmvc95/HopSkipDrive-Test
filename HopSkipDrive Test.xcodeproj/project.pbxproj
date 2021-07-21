@@ -16,6 +16,8 @@
 		7796E5B126A7B96A008919E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7796E5AF26A7B96A008919E8 /* LaunchScreen.storyboard */; };
 		7796E5BC26A7B96A008919E8 /* HopSkipDrive_TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5BB26A7B96A008919E8 /* HopSkipDrive_TestTests.swift */; };
 		7796E5C726A7B96A008919E8 /* HopSkipDrive_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5C626A7B96A008919E8 /* HopSkipDrive_TestUITests.swift */; };
+		7796E5DC26A7E85B008919E8 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5DB26A7E85B008919E8 /* MyRidesViewController.swift */; };
+		7796E5DE26A7E86A008919E8 /* MyRides.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7796E5DD26A7E86A008919E8 /* MyRides.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		7796E5C226A7B96A008919E8 /* HopSkipDrive TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HopSkipDrive TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7796E5C626A7B96A008919E8 /* HopSkipDrive_TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HopSkipDrive_TestUITests.swift; sourceTree = "<group>"; };
 		7796E5C826A7B96A008919E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7796E5DB26A7E85B008919E8 /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
+		7796E5DD26A7E86A008919E8 /* MyRides.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRides.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +137,8 @@
 		7796E5D426A7B9B1008919E8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7796E5A526A7B969008919E8 /* ViewController.swift */,
-				7796E5A726A7B969008919E8 /* Main.storyboard */,
+				7796E5D726A7E7EE008919E8 /* Controller */,
+				7796E5D826A7E7F6008919E8 /* Storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -142,9 +146,51 @@
 		7796E5D526A7B9BE008919E8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7796E5D626A7C859008919E8 /* MyRides */,
 				7796E5D426A7B9B1008919E8 /* Main */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		7796E5D626A7C859008919E8 /* MyRides */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5DA26A7E81D008919E8 /* Storyboard */,
+				7796E5D926A7E817008919E8 /* Controller */,
+			);
+			path = MyRides;
+			sourceTree = "<group>";
+		};
+		7796E5D726A7E7EE008919E8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5A526A7B969008919E8 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7796E5D826A7E7F6008919E8 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5A726A7B969008919E8 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		7796E5D926A7E817008919E8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5DB26A7E85B008919E8 /* MyRidesViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7796E5DA26A7E81D008919E8 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5DD26A7E86A008919E8 /* MyRides.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +298,7 @@
 			files = (
 				7796E5B126A7B96A008919E8 /* LaunchScreen.storyboard in Resources */,
 				7796E5AE26A7B96A008919E8 /* Assets.xcassets in Resources */,
+				7796E5DE26A7E86A008919E8 /* MyRides.storyboard in Resources */,
 				7796E5A926A7B969008919E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7796E5DC26A7E85B008919E8 /* MyRidesViewController.swift in Sources */,
 				7796E5A626A7B969008919E8 /* ViewController.swift in Sources */,
 				7796E5AC26A7B969008919E8 /* HopSkipDrive_Test.xcdatamodeld in Sources */,
 				7796E5A226A7B969008919E8 /* AppDelegate.swift in Sources */,

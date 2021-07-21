@@ -12,6 +12,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         title = "My Rides"
         createMenuButton()
+        showRides()
+    }
+    
+    private func showRides() {
+        if let controller = UIStoryboard(name: "MyRides", bundle: nil).instantiateViewController(withIdentifier: "myRidesController") as? MyRidesViewController {
+            addChild(controller)
+            controller.didMove(toParent: self)
+            controller.view.frame = view.frame
+            view.addSubview(controller.view)
+        }
     }
     
     private func createMenuButton() {
