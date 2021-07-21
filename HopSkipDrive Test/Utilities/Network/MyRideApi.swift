@@ -31,12 +31,14 @@ class MyRideApi {
     private func parseMyRideData(dataString: String) -> [MyRide]? {
         if let dict = dataString.convertToDict() {
             if let ridesArray = dict["rides"] as? NSArray {
+                var myRides: [MyRide] = []
                 for ride in ridesArray {
                     if let rideDict = ride as? [String: Any] {
                         let rideModel = MyRide.transformData(data: rideDict)
-                        print("rideModel: \(rideModel.endsAt)")
+                        myRides.append(rideModel)
                     }
                 }
+                return myRides
             }
         }
         return nil
