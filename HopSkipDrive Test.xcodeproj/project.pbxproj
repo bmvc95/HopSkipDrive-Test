@@ -25,6 +25,7 @@
 		7796E5EE26A7F276008919E8 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5ED26A7F276008919E8 /* Waypoint.swift */; };
 		7796E5F026A7F2A2008919E8 /* Passenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5EF26A7F2A2008919E8 /* Passenger.swift */; };
 		7796E5F226A7F3BB008919E8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F126A7F3BB008919E8 /* Location.swift */; };
+		7796E5F526A89E44008919E8 /* MyRideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F426A89E44008919E8 /* MyRideTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		7796E5ED26A7F276008919E8 /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		7796E5EF26A7F2A2008919E8 /* Passenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Passenger.swift; sourceTree = "<group>"; };
 		7796E5F126A7F3BB008919E8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		7796E5F426A89E44008919E8 /* MyRideTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRideTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 		7796E5D626A7C859008919E8 /* MyRides */ = {
 			isa = PBXGroup;
 			children = (
+				7796E5F326A89E30008919E8 /* Cell */,
 				7796E5DA26A7E81D008919E8 /* Storyboard */,
 				7796E5D926A7E817008919E8 /* Controller */,
 			);
@@ -244,6 +247,14 @@
 				7796E5F126A7F3BB008919E8 /* Location.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7796E5F326A89E30008919E8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7796E5F426A89E44008919E8 /* MyRideTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,6 +391,7 @@
 				7796E5EB26A7F015008919E8 /* MyRide.swift in Sources */,
 				7796E5E226A7EAE5008919E8 /* Api.swift in Sources */,
 				7796E5DC26A7E85B008919E8 /* MyRidesViewController.swift in Sources */,
+				7796E5F526A89E44008919E8 /* MyRideTableViewCell.swift in Sources */,
 				7796E5EE26A7F276008919E8 /* Waypoint.swift in Sources */,
 				7796E5F026A7F2A2008919E8 /* Passenger.swift in Sources */,
 				7796E5A626A7B969008919E8 /* ViewController.swift in Sources */,

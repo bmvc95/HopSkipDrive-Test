@@ -11,14 +11,16 @@ class MyRideApi {
     
     func retrieveRides(complete: @escaping([MyRide]?) -> Void) {
         if let url = URL(string: "https://storage.googleapis.com/hsd-interview-resources/simplified_my_rides_response.json") {
-            let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-                guard let self = self else { return }
-                // ALWAYS GOOD TO USE WEAK SELF, BUT ONE INSTANCE OF MYRIDEAPI WILL EVER EXIST
-                if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                    let myRides = self.parseMyRideData(dataString: dataString)
-                    complete(myRides)
-                } else {
-                    complete(nil)
+            let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    // ALWAYS GOOD TO USE WEAK SELF, BUT ONE INSTANCE OF MYRIDEAPI WILL EVER EXIST
+                    if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                        let myRides = self.parseMyRideData(dataString: dataString)
+                        complete(myRides)
+                    } else {
+                        complete(nil)
+                    }
                 }
             }
             task.resume()
