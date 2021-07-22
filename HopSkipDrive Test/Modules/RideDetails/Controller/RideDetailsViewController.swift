@@ -9,21 +9,33 @@ import UIKit
 import MapKit
 
 class RideDetailsViewController: UIViewController {
-    @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var detailsTableHeightAnchor: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var estimatedPriceLabel: PaddingLabel!
-    
     @IBOutlet weak var detailsTableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var cancelTripButton: UIButton!
     @IBOutlet weak var tripIDLabel: PaddingLabel!
+    
+    var ride: MyRide! {
+        didSet {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ride Details"
         createBackButton()
+        detailsTableView.dataSource = self
+        detailsTableView.delegate = self
+        detailsTableView.reloadData()
+        view.layoutIfNeeded()
+        detailsTableHeightAnchor.constant = detailsTableView.contentSize.height
+        estimatedPriceLabel.layer.cornerRadius = estimatedPriceLabel.frame.height / 2
     }
     
     @IBAction func cancelTrip(_ sender: Any) {
@@ -41,5 +53,18 @@ class RideDetailsViewController: UIViewController {
     
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension RideDetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "rideDetailCell", for: indexPath) as? RideDetailTableViewCell else {
+            fatalError("There is no class by the name of RideDetailTableViewCell")
+        }
+        return cell
     }
 }
