@@ -31,6 +31,7 @@
 		7796E5FA26A8F958008919E8 /* RideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F926A8F958008919E8 /* RideHeaderView.swift */; };
 		7796E60026A91817008919E8 /* RideDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7796E5FF26A91817008919E8 /* RideDetails.storyboard */; };
 		7796E60226A9182F008919E8 /* RideDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E60126A9182F008919E8 /* RideDetailsViewController.swift */; };
+		7796E60526A91FEA008919E8 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E60426A91FEA008919E8 /* PaddingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		7796E5F926A8F958008919E8 /* RideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideHeaderView.swift; sourceTree = "<group>"; };
 		7796E5FF26A91817008919E8 /* RideDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RideDetails.storyboard; sourceTree = "<group>"; };
 		7796E60126A9182F008919E8 /* RideDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideDetailsViewController.swift; sourceTree = "<group>"; };
+		7796E60426A91FEA008919E8 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,9 +134,9 @@
 			children = (
 				7796E5E926A7EFE0008919E8 /* Models */,
 				7796E5DF26A7EAC4008919E8 /* Utilities */,
+				7796E5D526A7B9BE008919E8 /* Modules */,
 				7796E5A126A7B969008919E8 /* AppDelegate.swift */,
 				7796E5A326A7B969008919E8 /* SceneDelegate.swift */,
-				7796E5D526A7B9BE008919E8 /* Modules */,
 				7796E5AD26A7B96A008919E8 /* Assets.xcassets */,
 				7796E5AF26A7B96A008919E8 /* LaunchScreen.storyboard */,
 				7796E5B226A7B96A008919E8 /* Info.plist */,
@@ -226,6 +228,7 @@
 		7796E5DF26A7EAC4008919E8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7796E60326A91FD6008919E8 /* Views */,
 				7796E5E526A7EE3F008919E8 /* Extensions */,
 				7796E5E026A7EACA008919E8 /* Network */,
 			);
@@ -300,6 +303,14 @@
 				7796E5FF26A91817008919E8 /* RideDetails.storyboard */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		7796E60326A91FD6008919E8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7796E60426A91FEA008919E8 /* PaddingLabel.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +456,7 @@
 				7796E5A626A7B969008919E8 /* ViewController.swift in Sources */,
 				7796E5AC26A7B969008919E8 /* HopSkipDrive_Test.xcdatamodeld in Sources */,
 				7796E5E826A7EEC0008919E8 /* String+Extensions.swift in Sources */,
+				7796E60526A91FEA008919E8 /* PaddingLabel.swift in Sources */,
 				7796E5A226A7B969008919E8 /* AppDelegate.swift in Sources */,
 				7796E5A426A7B969008919E8 /* SceneDelegate.swift in Sources */,
 				7796E5F726A8CDBE008919E8 /* Int+Extensions.swift in Sources */,
