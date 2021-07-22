@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-/* PROTOCOL FOR TO INHERIT FOR SUBSCIBED INSTANCES */
+/* PROTOCOL TO INHERIT FOR SUBSCIBED INSTANCES */
 protocol RideDetailTableViewCellDelegate: AnyObject {
     func goToPin(location: CLLocationCoordinate2D)
 }
