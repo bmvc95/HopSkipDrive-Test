@@ -50,6 +50,7 @@ class RideDetailsViewController: UIViewController {
             }
         }
     }
+    
     private func setupSeriesLabel() {
         if let series = ride.inSeries, series {
             seriesLabel.text = "This trip is part of series"
@@ -121,9 +122,16 @@ extension RideDetailsViewController: UITableViewDelegate, UITableViewDataSource 
             fatalError("There is no class by the name of RideDetailTableViewCell")
         }
         cell.detail = ride.orderedWaypoints?[indexPath.row]
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         viewWillLayoutSubviews()
+    }
+}
+
+extension RideDetailsViewController: RideDetailTableViewCellDelegate {
+    func goToPin(location: CLLocationCoordinate2D) {
+        mapView.setCenter(location, animated: true)
     }
 }

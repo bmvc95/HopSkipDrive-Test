@@ -6,6 +6,11 @@
 //
 
 import UIKit
+import MapKit
+
+protocol RideDetailTableViewCellDelegate: AnyObject {
+    func goToPin(location: CLLocationCoordinate2D)
+}
 
 class RideDetailTableViewCell: UITableViewCell {
 
@@ -13,6 +18,7 @@ class RideDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var anchorLabel: UILabel!
     @IBOutlet weak var anchorImage: UIImageView!
     
+    weak var delegate: RideDetailTableViewCellDelegate?
     var detail: Waypoint! {
         didSet {
             updateView()
@@ -24,6 +30,19 @@ class RideDetailTableViewCell: UITableViewCell {
             addressLabel.text = address
         }
         setupAnchorUI()
+        setupTapGesture()
+    }
+    
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(goToCoords))
+        contentView.addGestureRecognizer(tap)
+        contentView.isUserInteractionEnabled = true
+    }
+    
+    @objc private func goToCoords() {
+        if let location = detail.location?.annotation?.coordinate {
+            delegate?.goToPin(location: location)
+        }
     }
     
     private func setupAnchorUI() {
