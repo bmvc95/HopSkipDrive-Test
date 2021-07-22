@@ -9,6 +9,8 @@ import UIKit
 
 @IBDesignable class PaddingLabel: UILabel {
 
+    /* IB DESIGNABLE CLASS TO UPDATE A LABELS PADDING FROM THE
+    INTERFACE BUILDER */
     @IBInspectable var topInset: CGFloat = 5.0
     @IBInspectable var bottomInset: CGFloat = 5.0
     @IBInspectable var leftInset: CGFloat = 7.0
@@ -27,7 +29,6 @@ import UIKit
 
     override var bounds: CGRect {
         didSet {
-            // ensures this works within stack views if multi-line
             preferredMaxLayoutWidth = bounds.width - (leftInset + rightInset)
         }
     }
