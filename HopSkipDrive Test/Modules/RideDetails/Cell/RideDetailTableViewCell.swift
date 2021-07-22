@@ -8,6 +8,7 @@
 import UIKit
 import MapKit
 
+/* PROTOCOL FOR TO INHERIT FOR SUBSCIBED INSTANCES */
 protocol RideDetailTableViewCellDelegate: AnyObject {
     func goToPin(location: CLLocationCoordinate2D)
 }
@@ -25,6 +26,7 @@ class RideDetailTableViewCell: UITableViewCell {
         }
     }
     
+    /* FUNCTION THAT UPDATES THE UI WITH COORESPONDING DATA */
     private func updateView() {
         if let address = detail.location?.address {
             addressLabel.text = address
@@ -33,18 +35,21 @@ class RideDetailTableViewCell: UITableViewCell {
         setupTapGesture()
     }
     
+    /* FUNCTION ADDING TAP GESTURE TO CONTENT VIEW */
     private func setupTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(goToCoords))
         contentView.addGestureRecognizer(tap)
         contentView.isUserInteractionEnabled = true
     }
     
+    /* FUNCTION THAT CALLS DELEGATE TO CENTER PIN ON MAP VIEW */
     @objc private func goToCoords() {
         if let location = detail.location?.annotation?.coordinate {
             delegate?.goToPin(location: location)
         }
     }
     
+    /* FUNCTION THAT SETUPS THE DROP OFF/PICKUP UI BASED ON ANCHOR */
     private func setupAnchorUI() {
         if detail.anchor == true {
             anchorLabel.text = "Pickup"
