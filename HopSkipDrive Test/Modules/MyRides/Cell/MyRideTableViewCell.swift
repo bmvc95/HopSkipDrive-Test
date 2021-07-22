@@ -19,7 +19,7 @@ class MyRideTableViewCell: UITableViewCell {
     @IBOutlet weak var estimatedCostLabel: UILabel!
     @IBOutlet weak var riderCountLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    weak var delegate: MyRideTableViewCellDelegate?
+    weak var delegate: MyRideTableViewCellDelegate? //MUST BE WEAK OR RETAINED CYCLE WILL OCCUR
     var ride: MyRide! {
         didSet {
             updateView()

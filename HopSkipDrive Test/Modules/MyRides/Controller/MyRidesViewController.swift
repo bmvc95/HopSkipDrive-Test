@@ -40,6 +40,7 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myRideCell") as? MyRideTableViewCell else {
             fatalError("There is no class by the name of MyRideTableViewCell")
         }
+        cell.delegate = self
         cell.ride = rides[indexPath.section][indexPath.row]
         if rides[indexPath.section].count - 1 == indexPath.row {
             cell.viewHolderBottomAnchor.constant = 16
@@ -73,5 +74,11 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
         view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
         return view
+    }
+}
+
+extension MyRidesViewController: MyRideTableViewCellDelegate {
+    func showRideDetails() {
+        
     }
 }
