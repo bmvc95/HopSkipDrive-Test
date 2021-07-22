@@ -9,7 +9,7 @@ import UIKit
 
 class MyRidesViewController: UIViewController {
     @IBOutlet weak var ridesTableView: UITableView!
-    var rides: [MyRide] = []
+    var rides: [[MyRide]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         ridesTableView.estimatedRowHeight = 64
@@ -23,7 +23,6 @@ class MyRidesViewController: UIViewController {
             if let rides = rides {
                 self.rides = rides
                 self.ridesTableView.reloadData()
-                print("RIDES: \(rides)")
             } else {
                 print("You have no rides")
             }
@@ -34,17 +33,45 @@ class MyRidesViewController: UIViewController {
 
 extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rides.count
+        return rides[section].count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myRideCell") as? MyRideTableViewCell else {
-            
             fatalError("There is no class by the name of MyRideTableViewCell")
         }
-        cell.ride = rides[indexPath.row]
+        cell.ride = rides[indexPath.section][indexPath.row]
+        if rides[indexPath.section].count - 1 == indexPath.row {
+            cell.viewHolderBottomAnchor.constant = 16
+        }
         return cell
     }
+    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return rides.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let rideHeader = RideHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
+        rideHeader.rides = rides[section]
+        return rideHeader
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1))
+        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        return view
     }
 }

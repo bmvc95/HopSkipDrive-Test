@@ -7,10 +7,17 @@
 
 import Foundation
 
-class Passenger {
+class Passenger: Hashable, Equatable {
+
     var id: Int?
     var boosterSeat: Bool?
     var fistName: String?
+    
+    static func == (lhs: Passenger, rhs: Passenger) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {}
 }
 
 extension Passenger {
