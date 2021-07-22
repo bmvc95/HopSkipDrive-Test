@@ -37,8 +37,19 @@ class RideDetailsViewController: UIViewController {
         setupHeaderView()
         setupFooterView()
         setupSeriesLabel()
+        setupMapView()
     }
     
+    private func setupMapView() {
+        mapView.showsUserLocation = true
+        if let waypoints = ride.orderedWaypoints {
+            for waypoint in waypoints {
+                if let annotation = waypoint.location?.annotation {
+                    mapView.addAnnotation(annotation)
+                }
+            }
+        }
+    }
     private func setupSeriesLabel() {
         if let series = ride.inSeries, series {
             seriesLabel.text = "This trip is part of series"
