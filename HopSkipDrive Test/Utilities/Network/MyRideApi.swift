@@ -14,6 +14,8 @@ class MyRideApi {
      BUT FOR THIS PROJECT, THE DATA SET IS LIMITED AND SMALL. TOO MUCH NETWORK TRAFFIC
      WILL BOG DOWN THE DEVICE AND DECREASE UX */
     
+    
+    /* FUNCTION TO RETRIEVE RIDE DETAILS FOR A GIVEN USER */
     func retrieveRides(complete: @escaping([[MyRide]]?) -> Void) {
         if let url = URL(string: "https://storage.googleapis.com/hsd-interview-resources/simplified_my_rides_response.json") {
             let task = URLSession.shared.dataTask(with: url) { data, _, _ in
@@ -53,6 +55,8 @@ class MyRideApi {
         return nil
     }
     
+    /* FUNCTION THAT CREATES TWO DIMENSION ARRAY OF RIDES TO ALLOW FOR
+     EASIER SORTING */
     private func groupRidesOnDate(_ myRides: [MyRide]) -> [[MyRide]] {
         var rides: [[MyRide]] = []
         for i in 0..<myRides.count {
