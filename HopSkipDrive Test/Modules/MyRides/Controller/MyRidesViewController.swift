@@ -79,6 +79,8 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension MyRidesViewController: MyRideTableViewCellDelegate {
     func showRideDetails() {
-        
+        if let controller = UIStoryboard(name: "RideDetails", bundle: nil).instantiateViewController(withIdentifier: "rideDetailsController") as? RideDetailsViewController {
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }

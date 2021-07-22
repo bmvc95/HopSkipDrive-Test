@@ -43,7 +43,18 @@ class MyRideTableViewCell: UITableViewCell {
             updateRiderLabel(waypoints)
             updateEstimatedCostLabel()
             updateTimeLabel()
+            addHolderGesture()
         }
+    }
+    
+    private func addHolderGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(goToDetails))
+        viewHolder.addGestureRecognizer(tap)
+        viewHolder.isUserInteractionEnabled = true
+    }
+    
+    @objc private func goToDetails() {
+        delegate?.showRideDetails()
     }
     
     private func setupBorderShadow() {
