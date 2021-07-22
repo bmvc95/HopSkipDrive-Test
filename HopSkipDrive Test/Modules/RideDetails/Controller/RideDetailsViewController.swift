@@ -6,12 +6,28 @@
 //
 
 import UIKit
+import MapKit
 
 class RideDetailsViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var estimatedPriceLabel: PaddingLabel!
+    
+    @IBOutlet weak var detailsTableView: UITableView!
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var cancelTripButton: UIButton!
+    @IBOutlet weak var tripIDLabel: PaddingLabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ride Details"
         createBackButton()
+    }
+    
+    @IBAction func cancelTrip(_ sender: Any) {
+        
     }
     
     private func createBackButton() {
