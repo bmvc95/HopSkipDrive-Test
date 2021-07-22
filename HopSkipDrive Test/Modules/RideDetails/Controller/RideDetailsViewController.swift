@@ -23,6 +23,8 @@ class RideDetailsViewController: UIViewController {
     
     var ride: MyRide!
     
+    /* USED TO INCREASE THE HEIGHT OF TABLE VIEW TO FIT ITS CONTENT,
+     THOUGHT IT WOULD BE BETTER UX */
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
         self.detailsTableHeightAnchor.constant = self.detailsTableView.contentSize.height
@@ -40,17 +42,26 @@ class RideDetailsViewController: UIViewController {
         setupMapView()
     }
     
+    /* FUNCTION THAT MARKS PINS ON THE MAP BASED ON WAYPOINT
+     COORDINATES AND THEN CENTERS THE MAP ON PICK UP LOCATION */
     private func setupMapView() {
         mapView.showsUserLocation = true
+        mapView.delegate = self
         if let waypoints = ride.orderedWaypoints {
             for waypoint in waypoints {
                 if let annotation = waypoint.location?.annotation {
                     mapView.addAnnotation(annotation)
                 }
             }
+            if let pickUpCoord = waypoints.last?.location?.annotation?.coordinate {
+                let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+                let region = MKCoordinateRegion(center: pickUpCoord, span: span)
+                mapView.setRegion(region, animated: true)
+            }
         }
     }
     
+    /* FUNCTIONALITY THAT SHOWS OR HIDES THE SERIES LABEL BASED ON BOOL */
     private func setupSeriesLabel() {
         if let series = ride.inSeries, series {
             seriesLabel.text = "This trip is part of series"
@@ -69,6 +80,7 @@ class RideDetailsViewController: UIViewController {
         detailsTableView.reloadData()
     }
     
+    /* FUNCTIONALITY TO SETUP FOOTER VIEW UI WITH ITS COORESPONDING DATA */
     private func setupFooterView() {
         if let tripID = ride.tripID,
            let miles = ride.estimatedRideMiles,
@@ -77,6 +89,8 @@ class RideDetailsViewController: UIViewController {
         }
     }
     
+    /* FUNCTIONALITY THAT SETUPS UP THE HEADER VIEW UI WITH ITS
+     CORRESPONDING DATA */
     private func setupHeaderView() {
         if let date = ride.startsAt?.dateFromIso(format: "E MM/dd") {
             dateLabel.text = date
@@ -94,10 +108,12 @@ class RideDetailsViewController: UIViewController {
         }
     }
     
+    /* FUNCTIONALITY TO CANCEL THE CURRENT TRIP */
     @IBAction func cancelTrip(_ sender: Any) {
         
     }
     
+    /* FUNCTIONALITY TO CREATE THE BACK ARROW FOR THE NAVIGATION BAR */
     private func createBackButton() {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "back-arrow")?.withTintColor(.white), for: .normal)
@@ -107,6 +123,7 @@ class RideDetailsViewController: UIViewController {
         navigationItem.leftBarButtonItems = [barButton]
     }
     
+    /* FUNCTIONALITY TO POP THE USER BACK TO THEIR RIDES VIEW */
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -125,13 +142,38 @@ extension RideDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         cell.delegate = self
         return cell
     }
+    
+    /* CALLING VIEWWILLLAYOUTSUBVIEWS HERE TO
+     EXPAND THE TABLEVIEW HEIGHT DYNAMICALLY */
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         viewWillLayoutSubviews()
     }
 }
 
+/* FUNCTIONALITY TO CENTER THE TAPPED ADDRESS ON THE MAP VIEW
+THIS WILL MAKE UX BETTER */
 extension RideDetailsViewController: RideDetailTableViewCellDelegate {
     func goToPin(location: CLLocationCoordinate2D) {
-        mapView.setCenter(location, animated: true)
+        let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        let region = MKCoordinateRegion(center: location, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+}
+
+/* FUNCTIONALITY TO MARK THE WAYPOINTS ON THE MAP AND TO APPLY THE
+ APPROPIATE BACKGROUND COLOR BASED ON PICK UP OR DROP OFF */
+extension RideDetailsViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
+        let identifier = "identifier"
+        var color = UIColor(red: 4/255, green: 254/255, blue: 26/255, alpha: 1)
+        if let isPickUp = ride.orderedWaypoints?.filter({$0.location?.annotation?.title == annotation.title}).first?.anchor, isPickUp {
+            color = UIColor(red: 255/255, green: 8/255, blue: 0/255, alpha: 1)
+        }
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        annotationView.backgroundColor = color
+        annotationView.frame.size = CGSize(width: 20, height: 20)
+        annotationView.layer.cornerRadius = 10
+        return annotationView
     }
 }
