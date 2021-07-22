@@ -20,22 +20,21 @@ class RideDetailsViewController: UIViewController {
     @IBOutlet weak var cancelTripButton: UIButton!
     @IBOutlet weak var tripIDLabel: PaddingLabel!
     
-    var ride: MyRide! {
-        didSet {
-            
-        }
+    var ride: MyRide!
+    
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+        self.detailsTableHeightAnchor.constant = self.detailsTableView.contentSize.height
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ride Details"
         createBackButton()
+        estimatedPriceLabel.layer.cornerRadius = estimatedPriceLabel.frame.height / 2
         detailsTableView.dataSource = self
         detailsTableView.delegate = self
         detailsTableView.reloadData()
-        view.layoutIfNeeded()
-        detailsTableHeightAnchor.constant = detailsTableView.contentSize.height
-        estimatedPriceLabel.layer.cornerRadius = estimatedPriceLabel.frame.height / 2
     }
     
     @IBAction func cancelTrip(_ sender: Any) {
@@ -58,13 +57,17 @@ class RideDetailsViewController: UIViewController {
 
 extension RideDetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return ride?.orderedWaypoints?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "rideDetailCell", for: indexPath) as? RideDetailTableViewCell else {
             fatalError("There is no class by the name of RideDetailTableViewCell")
         }
+        cell.detail = ride.orderedWaypoints?[indexPath.row]
         return cell
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        viewWillLayoutSubviews()
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MyRideTableViewCellDelegate: AnyObject {
-    func showRideDetails()
+    func showRideDetails(ride: MyRide)
 }
 
 class MyRideTableViewCell: UITableViewCell {
@@ -54,7 +54,7 @@ class MyRideTableViewCell: UITableViewCell {
     }
     
     @objc private func goToDetails() {
-        delegate?.showRideDetails()
+        delegate?.showRideDetails(ride: ride)
     }
     
     private func setupBorderShadow() {
