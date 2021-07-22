@@ -10,12 +10,18 @@ import UIKit
 class MyRidesViewController: UIViewController {
     @IBOutlet weak var ridesTableView: UITableView!
     var rides: [[MyRide]] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ridesTableView.estimatedRowHeight = 64
         ridesTableView.rowHeight = UITableView.automaticDimension
         ridesTableView.delegate = self
         ridesTableView.dataSource = self
+        retrieveRides()
+    }
+    
+    /* FUNCTION THAT CALLS THE MY RIDES API TO LOAD SCHEDULED RIDES */
+    private func retrieveRides() {
         Api.myRides.retrieveRides { [weak self] rides in
             /* HERE WE WANT TO USE [WEAK SELF] FOR SURE BECAUSE
             MAYBE THIS CONTROLLER DOESNT EXIST BY THE TIME THE CLOSURE IS CALLED */
@@ -27,7 +33,6 @@ class MyRidesViewController: UIViewController {
                 print("You have no rides")
             }
         }
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -42,6 +47,8 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
         }
         cell.delegate = self
         cell.ride = rides[indexPath.section][indexPath.row]
+        /* CLEAN UP THE UI BY SPACING OUT THE CELLS FROM EACH OTHER
+         EXCEPT FOR THE LAST CELL */
         if rides[indexPath.section].count - 1 == indexPath.row {
             cell.viewHolderBottomAnchor.constant = 16
         }
@@ -77,6 +84,7 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+/* PROTOCOL FUNCTION CALL THAT PUSHES RIDE DETAILS TO THE NAVIGATION STACK */
 extension MyRidesViewController: MyRideTableViewCellDelegate {
     func showRideDetails(ride: MyRide) {
         if let controller = UIStoryboard(name: "RideDetails", bundle: nil).instantiateViewController(withIdentifier: "rideDetailsController") as? RideDetailsViewController {
