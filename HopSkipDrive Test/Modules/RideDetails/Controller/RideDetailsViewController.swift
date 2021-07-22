@@ -19,6 +19,7 @@ class RideDetailsViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var cancelTripButton: UIButton!
     @IBOutlet weak var tripIDLabel: PaddingLabel!
+    @IBOutlet weak var seriesLabel: PaddingLabel!
     
     var ride: MyRide!
     
@@ -32,9 +33,53 @@ class RideDetailsViewController: UIViewController {
         title = "Ride Details"
         createBackButton()
         estimatedPriceLabel.layer.cornerRadius = estimatedPriceLabel.frame.height / 2
+        setupTableView()
+        setupHeaderView()
+        setupFooterView()
+        setupSeriesLabel()
+    }
+    
+    private func setupSeriesLabel() {
+        if let series = ride.inSeries, series {
+            seriesLabel.text = "This trip is part of series"
+            seriesLabel.topInset = 16
+            seriesLabel.bottomInset = 16
+        } else {
+            seriesLabel.text = ""
+            seriesLabel.topInset = 0
+            seriesLabel.bottomInset = 0
+        }
+    }
+    
+    private func setupTableView() {
         detailsTableView.dataSource = self
         detailsTableView.delegate = self
         detailsTableView.reloadData()
+    }
+    
+    private func setupFooterView() {
+        if let tripID = ride.tripID,
+           let miles = ride.estimatedRideMiles,
+           let time = ride.estimatedRideMinutes {
+            tripIDLabel.text = "Trip ID: \(tripID) · \(miles) mi · \(time) min"
+        }
+    }
+    
+    private func setupHeaderView() {
+        if let date = ride.startsAt?.dateFromIso(format: "E MM/dd") {
+            dateLabel.text = date
+        }
+        if let startTime = ride.startsAt?.timeFromIso(), let endTime = ride.endsAt?.timeFromIso() {
+            let mutableString = NSMutableAttributedString(string: " · \(startTime) - \(endTime)")
+            let range = NSRange(location: 0, length: 5 + startTime.count)
+            mutableString.addAttribute(.font,
+                                       value: UIFont.systemFont(ofSize: timeLabel.font.pointSize, weight: .regular),
+                                       range: range)
+            timeLabel.attributedText = mutableString
+        }
+        if let price = ride.estimatedEarningCents?.convertToDollarString() {
+            estimatedPriceLabel.text = price
+        }
     }
     
     @IBAction func cancelTrip(_ sender: Any) {

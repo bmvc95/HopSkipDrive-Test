@@ -14,7 +14,7 @@ class MyRide: Equatable {
     var startsAt: String?
     var endsAt: String?
     var estimatedEarningCents: Int?
-    var estimatedRideMinutes: Double?
+    var estimatedRideMinutes: Int?
     var estimatedRideMiles: Double?
     var orderedWaypoints: [Waypoint]?
     
@@ -40,7 +40,7 @@ extension MyRide {
         ride.startsAt = (data["starts_at"] as? String) ?? ""
         ride.endsAt = (data["ends_at"] as? String) ?? ""
         ride.estimatedEarningCents = (data["estimated_earnings_cents"] as? Int) ?? 0
-        ride.estimatedRideMinutes = (data["estimated_ride_minutes"] as? Double) ?? 0
+        ride.estimatedRideMinutes = (data["estimated_ride_minutes"] as? Int) ?? 0
         ride.estimatedRideMiles = (data["estimated_ride_miles"] as? Double) ?? 0
         if let waypoints = data["ordered_waypoints"] as? NSArray {
             ride.orderedWaypoints = waypoints.map({Waypoint.transformData(data: $0 as? [String: Any] ?? [:])})

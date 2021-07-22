@@ -299,6 +299,7 @@
                         <outlet property="estimatedPriceLabel" destination="luR-aX-f1t" id="62N-hb-RqK"/>
                         <outlet property="mapView" destination="6uf-HQ-dga" id="8z0-Hy-Fga"/>
                         <outlet property="scrollView" destination="rtZ-dh-uJp" id="m9n-pg-dFd"/>
+                        <outlet property="seriesLabel" destination="OTV-ST-dhS" id="KvP-E0-OTd"/>
                         <outlet property="timeLabel" destination="e2n-S9-ymC" id="BLd-KP-1ao"/>
                         <outlet property="tripIDLabel" destination="5Sb-Vu-VPc" id="Hpa-8n-0ut"/>
                     </connections>
