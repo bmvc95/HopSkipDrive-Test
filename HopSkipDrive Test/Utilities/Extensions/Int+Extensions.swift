@@ -8,6 +8,7 @@
 import Foundation
 
 extension Int {
+    /* FUNCTION THAT CONVERTS CENTS TO A DOLLAR STRING */
     func convertToDollarString() -> String {
         return "$" + String(format: "%.2f", (Double(self) / 100))
     }
