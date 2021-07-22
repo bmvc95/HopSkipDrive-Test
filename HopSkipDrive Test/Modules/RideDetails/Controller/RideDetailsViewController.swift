@@ -53,7 +53,7 @@ class RideDetailsViewController: UIViewController {
                     mapView.addAnnotation(annotation)
                 }
             }
-            if let pickUpCoord = waypoints.last?.location?.annotation?.coordinate {
+            if let pickUpCoord = waypoints.first?.location?.annotation?.coordinate {
                 let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
                 let region = MKCoordinateRegion(center: pickUpCoord, span: span)
                 mapView.setRegion(region, animated: true)
@@ -167,7 +167,7 @@ extension RideDetailsViewController: MKMapViewDelegate {
         guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
         let identifier = "identifier"
         var color = UIColor(red: 4/255, green: 254/255, blue: 26/255, alpha: 1)
-        if let isPickUp = ride.orderedWaypoints?.filter({$0.location?.annotation?.title == annotation.title}).first?.anchor, isPickUp {
+        if let isPickUp = ride.orderedWaypoints?.filter({$0.location?.annotation?.title == annotation.title}).first?.anchor, !isPickUp {
             color = UIColor(red: 255/255, green: 8/255, blue: 0/255, alpha: 1)
         }
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
