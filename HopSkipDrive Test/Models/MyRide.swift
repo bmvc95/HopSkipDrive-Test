@@ -24,6 +24,9 @@ class MyRide: Equatable {
 }
 
 extension MyRide {
+    
+    /* FUNCTION THAT RETURNS THE UNIQUE PASSENGERS BETWEEN THE WAYPOINTS OF
+     A GIVEN TRIP, UNIQUE PASSENGERS ARE BASED OF ID */
     func getUniquePassengers() -> [Passenger] {
         if let waypoints = orderedWaypoints {
             let passengersArray = waypoints.map({($0.passengers ?? [])})
