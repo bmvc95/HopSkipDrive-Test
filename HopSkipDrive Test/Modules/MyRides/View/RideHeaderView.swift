@@ -28,6 +28,8 @@ class RideHeaderView: UIView {
         setupEstimatedTotalLabel()
     }
     
+    /* FUNCTION TO SETUP ESTIMATED TOTAL PRICE LABEL BY COMBING TRIP PRICES
+     FOR THAT GIVEN DAY AND THEN CONVERTING CENTS TO DOLLARS */
     private func setupEstimatedTotalLabel() {
         let total = rides.map({$0.estimatedEarningCents ?? 0}).reduce(0, +).convertToDollarString()
         let mutableString = NSMutableAttributedString(string: "ESTIMATED\n\(total)")
@@ -37,6 +39,8 @@ class RideHeaderView: UIView {
         estimated.attributedText = mutableString
     }
     
+    /* FUNCTION THAT CALCULATES THE DAYS TOTAL TIME BY TAKING THE START TIME
+     OF THE EARLIEST RIDE AND THE END TIME FOR THE LAST RIDE */
     private func setupTimeDateLabel() {
         if let firstRide = rides.first, let lastRide = rides.last {
             dateLabel.text = firstRide.startsAt?.dateFromIso(format: "E MM/dd")
@@ -53,6 +57,8 @@ class RideHeaderView: UIView {
         }
     }
     
+    /* FUNCTION TO CREATE THE VIEW AND ADD THE CONSTRAINTS, DEMONSTRATING
+     CREATING VIEWS PROGRAMMATICALLY VERSUS INTERFACE */
     private func createView() {
         backgroundColor = .systemBackground
         addSubview(dateLabel)
@@ -72,6 +78,7 @@ class RideHeaderView: UIView {
         ])
     }
     
+    // MARK: - VIEW PROPERTIES
     let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
