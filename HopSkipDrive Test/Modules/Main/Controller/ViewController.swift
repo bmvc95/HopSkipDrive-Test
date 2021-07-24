@@ -13,6 +13,12 @@ class ViewController: UIViewController {
         title = "My Rides"
         createMenuButton()
         showRides()
+        
+        if let window = UIApplication.shared.windows.first {
+            let splashView = SplashView(frame: window.frame)
+            window.addSubview(splashView)
+
+        }
     }
     
     private func showRides() {
