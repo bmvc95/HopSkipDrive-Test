@@ -21,7 +21,7 @@ class RideDetailsViewController: UIViewController {
     @IBOutlet weak var tripIDLabel: PaddingLabel!
     @IBOutlet weak var seriesLabel: PaddingLabel!
     
-    var ride: MyRide!
+    var ride: Ride!
     
     /* USED TO INCREASE THE HEIGHT OF TABLE VIEW TO FIT ITS CONTENT,
      THOUGHT IT WOULD BE BETTER UX */

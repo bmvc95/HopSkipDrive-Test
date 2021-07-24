@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7727456A26ABC98700AD9D7F /* ride_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7727456926ABC98700AD9D7F /* ride_data.json */; };
 		7796E5A226A7B969008919E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5A126A7B969008919E8 /* AppDelegate.swift */; };
 		7796E5A426A7B969008919E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5A326A7B969008919E8 /* SceneDelegate.swift */; };
 		7796E5A626A7B969008919E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5A526A7B969008919E8 /* ViewController.swift */; };
@@ -19,7 +20,7 @@
 		7796E5DC26A7E85B008919E8 /* MyRidesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5DB26A7E85B008919E8 /* MyRidesViewController.swift */; };
 		7796E5DE26A7E86A008919E8 /* MyRides.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7796E5DD26A7E86A008919E8 /* MyRides.storyboard */; };
 		7796E5E226A7EAE5008919E8 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5E126A7EAE5008919E8 /* Api.swift */; };
-		7796E5E426A7EB0A008919E8 /* MyRideApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5E326A7EB0A008919E8 /* MyRideApi.swift */; };
+		7796E5E426A7EB0A008919E8 /* RidesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5E326A7EB0A008919E8 /* RidesApi.swift */; };
 		7796E5E826A7EEC0008919E8 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5E726A7EEC0008919E8 /* String+Extensions.swift */; };
 		7796E5EB26A7F015008919E8 /* MyRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5EA26A7F015008919E8 /* MyRide.swift */; };
 		7796E5EE26A7F276008919E8 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5ED26A7F276008919E8 /* Waypoint.swift */; };
@@ -27,7 +28,6 @@
 		7796E5F226A7F3BB008919E8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F126A7F3BB008919E8 /* Location.swift */; };
 		7796E5F526A89E44008919E8 /* MyRideTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F426A89E44008919E8 /* MyRideTableViewCell.swift */; };
 		7796E5F726A8CDBE008919E8 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F626A8CDBE008919E8 /* Int+Extensions.swift */; };
-		7796E5F826A8EEF5008919E8 /* MyRideApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5E326A7EB0A008919E8 /* MyRideApi.swift */; };
 		7796E5FA26A8F958008919E8 /* RideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5F926A8F958008919E8 /* RideHeaderView.swift */; };
 		7796E60026A91817008919E8 /* RideDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7796E5FF26A91817008919E8 /* RideDetails.storyboard */; };
 		7796E60226A9182F008919E8 /* RideDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E60126A9182F008919E8 /* RideDetailsViewController.swift */; };
@@ -53,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7727456926ABC98700AD9D7F /* ride_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ride_data.json; sourceTree = "<group>"; };
 		7796E59E26A7B969008919E8 /* HopSkipDrive Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HopSkipDrive Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7796E5A126A7B969008919E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7796E5A326A7B969008919E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,7 +72,7 @@
 		7796E5DB26A7E85B008919E8 /* MyRidesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRidesViewController.swift; sourceTree = "<group>"; };
 		7796E5DD26A7E86A008919E8 /* MyRides.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyRides.storyboard; sourceTree = "<group>"; };
 		7796E5E126A7EAE5008919E8 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		7796E5E326A7EB0A008919E8 /* MyRideApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRideApi.swift; sourceTree = "<group>"; };
+		7796E5E326A7EB0A008919E8 /* RidesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RidesApi.swift; sourceTree = "<group>"; };
 		7796E5E726A7EEC0008919E8 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		7796E5EA26A7F015008919E8 /* MyRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRide.swift; sourceTree = "<group>"; };
 		7796E5ED26A7F276008919E8 /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
@@ -150,6 +151,7 @@
 		7796E5BA26A7B96A008919E8 /* HopSkipDrive TestTests */ = {
 			isa = PBXGroup;
 			children = (
+				7727456926ABC98700AD9D7F /* ride_data.json */,
 				7796E5BB26A7B96A008919E8 /* HopSkipDrive_TestTests.swift */,
 				7796E5BD26A7B96A008919E8 /* Info.plist */,
 			);
@@ -241,7 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				7796E5E126A7EAE5008919E8 /* Api.swift */,
-				7796E5E326A7EB0A008919E8 /* MyRideApi.swift */,
+				7796E5E326A7EB0A008919E8 /* RidesApi.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -428,6 +430,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7796E5B126A7B96A008919E8 /* LaunchScreen.storyboard in Resources */,
+				7727456A26ABC98700AD9D7F /* ride_data.json in Resources */,
 				7796E5AE26A7B96A008919E8 /* Assets.xcassets in Resources */,
 				7796E5DE26A7E86A008919E8 /* MyRides.storyboard in Resources */,
 				7796E5A926A7B969008919E8 /* Main.storyboard in Resources */,
@@ -473,7 +476,7 @@
 				7796E60826A92D1C008919E8 /* RideDetailTableViewCell.swift in Sources */,
 				7796E5F726A8CDBE008919E8 /* Int+Extensions.swift in Sources */,
 				7796E5F226A7F3BB008919E8 /* Location.swift in Sources */,
-				7796E5E426A7EB0A008919E8 /* MyRideApi.swift in Sources */,
+				7796E5E426A7EB0A008919E8 /* RidesApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +484,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7796E5F826A8EEF5008919E8 /* MyRideApi.swift in Sources */,
 				7796E5BC26A7B96A008919E8 /* HopSkipDrive_TestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

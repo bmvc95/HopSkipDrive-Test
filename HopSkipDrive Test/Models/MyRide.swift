@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MyRide: Equatable {
+class Ride: Equatable {
     
     var tripID: Int?
     var inSeries: Bool?
@@ -18,12 +18,12 @@ class MyRide: Equatable {
     var estimatedRideMiles: Double?
     var orderedWaypoints: [Waypoint]?
     
-    static func == (lhs: MyRide, rhs: MyRide) -> Bool {
+    static func == (lhs: Ride, rhs: Ride) -> Bool {
         return lhs.tripID == rhs.tripID
     }
 }
 
-extension MyRide {
+extension Ride {
     
     /* FUNCTION THAT RETURNS THE UNIQUE PASSENGERS BETWEEN THE WAYPOINTS OF
      A GIVEN TRIP, UNIQUE PASSENGERS ARE BASED OF ID */
@@ -36,8 +36,8 @@ extension MyRide {
         return []
     }
     
-    static func transformData(data: [String: Any]) -> MyRide {
-        let ride = MyRide()
+    static func transformData(data: [String: Any]) -> Ride {
+        let ride = Ride()
         ride.tripID = (data["trip_id"] as? Int) ?? 0
         ride.inSeries = (data["in_series"] as? Bool) ?? false
         ride.startsAt = (data["starts_at"] as? String) ?? ""

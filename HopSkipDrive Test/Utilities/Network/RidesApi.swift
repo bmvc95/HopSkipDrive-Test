@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MyRideApi {
+class RidesApi {
     
     /* NORMALLY WHEN WE ARE RETRIEVING DATA LIKE THIS, BASED ON THE DATA SET SIZE,
      WE WOULD WANT TO QUERY 10 AT TIME, PREFERABLY BASED OFF EPOCH OR SOME UID,
@@ -16,7 +16,7 @@ class MyRideApi {
     
     
     /* FUNCTION TO RETRIEVE RIDE DETAILS FOR A GIVEN USER */
-    func retrieveRides(complete: @escaping([[MyRide]]?) -> Void) {
+    func retrieveRides(complete: @escaping([[Ride]]?) -> Void) {
         if let url = URL(string: "https://storage.googleapis.com/hsd-interview-resources/simplified_my_rides_response.json") {
             let task = URLSession.shared.dataTask(with: url) { data, _, _ in
                 DispatchQueue.main.async { [weak self] in
@@ -38,13 +38,13 @@ class MyRideApi {
     }
     
     /* PARSING FUNCTION TO HELP CONVERT THE DATA INTO AN ARRAY OF RIDE OBJECTS */
-    private func parseMyRideData(dataString: String) -> [[MyRide]]? {
+    func parseMyRideData(dataString: String) -> [[Ride]]? {
         if let dict = dataString.convertToDict() {
             if let ridesArray = dict["rides"] as? NSArray {
-                var myRides: [MyRide] = []
+                var myRides: [Ride] = []
                 for ride in ridesArray {
                     if let rideDict = ride as? [String: Any] {
-                        let rideModel = MyRide.transformData(data: rideDict)
+                        let rideModel = Ride.transformData(data: rideDict)
                         myRides.append(rideModel)
                     }
                 }
@@ -57,8 +57,8 @@ class MyRideApi {
     
     /* FUNCTION THAT CREATES TWO DIMENSION ARRAY OF RIDES TO ALLOW FOR
      EASIER SORTING */
-    private func groupRidesOnDate(_ myRides: [MyRide]) -> [[MyRide]] {
-        var rides: [[MyRide]] = []
+    func groupRidesOnDate(_ myRides: [Ride]) -> [[Ride]] {
+        var rides: [[Ride]] = []
         for i in 0..<myRides.count {
             let currentISODate = myRides[i].startsAt?.dateFromIso(format: "MM/dd/yy")
             if i != 0 {

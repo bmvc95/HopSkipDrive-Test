@@ -8,7 +8,7 @@
 import UIKit
 
 class RideHeaderView: UIView {
-    var rides: [MyRide]! {
+    var rides: [Ride]! {
         didSet {
             setupView()
         }

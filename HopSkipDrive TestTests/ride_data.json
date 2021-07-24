@@ -1,0 +1,222 @@
+
+
+{
+    "rides":
+    [
+        {
+            "trip_id": 123456,
+            "in_series": false,
+            "starts_at": "2021-06-17T11:18:00Z",
+            "ends_at": "2021-06-17T12:37:00Z",
+            "estimated_earnings_cents": 6071,
+            "estimated_ride_minutes": 50,
+            "estimated_ride_miles": 18.48,
+            "ordered_waypoints":
+            [
+                {
+                    "id": 222,
+                    "anchor": true,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": true,
+                            "first_name": "Mark"
+                        },
+                        {
+                            "id": 121,
+                            "booster_seat": false,
+                            "first_name": "John"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "2565 E Underhill Ave, Anaheim 92806",
+                        "lat": 34.17006916353578,
+                        "lng": -118.43274040504944
+                    }
+                },
+                {
+                    "id": 333,
+                    "anchor": false,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": true,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "Sunset Blvd, Los Angeles, CA 90045",
+                        "lat": 34.07833879405104,
+                        "lng": -118.17299579766896
+                    }
+                },
+                {
+                    "id": 444,
+                    "anchor": false,
+                    "passengers":
+                    [
+                        {
+                            "id": 121,
+                            "booster_seat": false,
+                            "first_name": "John"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "1420 S Figueroa St, Los Angeles 90015",
+                        "lat": 34.07833879405104,
+                        "lng": -118.17299579766896
+                    }
+                }
+            ]
+        },
+        {
+            "trip_id": 123456,
+            "in_series": true,
+            "starts_at": "2021-06-17T15:15:00Z",
+            "ends_at": "2021-06-17T15:29:00Z",
+            "estimated_earnings_cents": 1400,
+            "estimated_ride_minutes": 50,
+            "estimated_ride_miles": 18.48,
+            "ordered_waypoints":
+            [
+                {
+                    "id": 222,
+                    "anchor": true,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": false,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "2565 E Underhill Ave, Anaheim 92806",
+                        "lat": 34.17006916353578,
+                        "lng": -118.43274040504944
+                    }
+                },
+                {
+                    "id": 333,
+                    "anchor": false,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": false,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "123 Here Ave, Los Angeles, CA 90045",
+                        "lat": 34.07833879405104,
+                        "lng": -118.17299579766896
+                    }
+                }
+            ]
+        },
+        {
+            "trip_id": 123456,
+            "in_series": false,
+            "starts_at": "2021-06-17T22:36:00Z",
+            "ends_at": "2021-06-17T23:26:00Z",
+            "estimated_earnings_cents": 3054,
+            "estimated_ride_minutes": 50,
+            "estimated_ride_miles": 18.48,
+            "ordered_waypoints":
+            [
+                {
+                    "id": 222,
+                    "anchor": true,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": false,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "2565 E Underhill Ave, Anaheim 92806",
+                        "lat": 34.17006916353578,
+                        "lng": -118.43274040504944
+                    }
+                },
+                {
+                    "id": 333,
+                    "anchor": false,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": false,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "Sunset Blvd, Los Angeles, CA 90045",
+                        "lat": 34.07833879405104,
+                        "lng": -118.17299579766896
+                    }
+                }
+            ]
+        },
+        {
+            "trip_id": 123456,
+            "in_series": true,
+            "starts_at": "2021-06-21T15:15:00Z",
+            "ends_at": "2021-06-21T15:29:00Z",
+            "estimated_earnings_cents": 1400,
+            "estimated_ride_minutes": 50,
+            "estimated_ride_miles": 18.48,
+            "ordered_waypoints":
+            [
+                {
+                    "id": 222,
+                    "anchor": true,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": false,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "2565 E Underhill Ave, Anaheim 92806",
+                        "lat": 34.17006916353578,
+                        "lng": -118.43274040504944
+                    }
+                },
+                {
+                    "id": 333,
+                    "anchor": false,
+                    "passengers":
+                    [
+                        {
+                            "id": 123,
+                            "booster_seat": false,
+                            "first_name": "Mark"
+                        }
+                    ],
+                    "location":
+                    {
+                        "address": "Sunset Blvd, Los Angeles, CA 90045",
+                        "lat": 34.07833879405104,
+                        "lng": -118.17299579766896
+                    }
+                }
+            ]
+        }
+    ]
+}

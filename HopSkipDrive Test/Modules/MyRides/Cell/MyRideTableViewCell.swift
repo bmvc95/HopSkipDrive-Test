@@ -9,7 +9,7 @@ import UIKit
 
 /* PROTOCOL TO INHERIT FOR SUBSCIBED INSTANCES */
 protocol MyRideTableViewCellDelegate: AnyObject {
-    func showRideDetails(ride: MyRide)
+    func showRideDetails(ride: Ride)
 }
 
 class MyRideTableViewCell: UITableViewCell {
@@ -21,7 +21,7 @@ class MyRideTableViewCell: UITableViewCell {
     @IBOutlet weak var riderCountLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     weak var delegate: MyRideTableViewCellDelegate? //MUST BE WEAK OR RETAINED CYCLE WILL OCCUR
-    var ride: MyRide! {
+    var ride: Ride! {
         didSet {
             setupView()
         }

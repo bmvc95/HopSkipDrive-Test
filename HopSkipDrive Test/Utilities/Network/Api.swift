@@ -9,5 +9,5 @@ import Foundation
 
 /* API STRUCT THAT CREATES SINGLETONS OF API CLASSES */
 struct Api {
-    static let myRides = MyRideApi()
+    static let Rides = RidesApi()
 }

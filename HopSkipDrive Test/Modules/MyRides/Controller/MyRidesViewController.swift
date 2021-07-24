@@ -9,7 +9,7 @@ import UIKit
 
 class MyRidesViewController: UIViewController {
     @IBOutlet weak var ridesTableView: UITableView!
-    var rides: [[MyRide]] = []
+    var rides: [[Ride]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class MyRidesViewController: UIViewController {
     
     /* FUNCTION THAT CALLS THE MY RIDES API TO LOAD SCHEDULED RIDES */
     private func retrieveRides() {
-        Api.myRides.retrieveRides { [weak self] rides in
+        Api.Rides.retrieveRides { [weak self] rides in
             /* HERE WE WANT TO USE [WEAK SELF] FOR SURE BECAUSE
             MAYBE THIS CONTROLLER DOESNT EXIST BY THE TIME THE CLOSURE IS CALLED */
             guard let self = self else { return }
@@ -86,7 +86,7 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
 
 /* PROTOCOL FUNCTION CALL THAT PUSHES RIDE DETAILS TO THE NAVIGATION STACK */
 extension MyRidesViewController: MyRideTableViewCellDelegate {
-    func showRideDetails(ride: MyRide) {
+    func showRideDetails(ride: Ride) {
         if let controller = UIStoryboard(name: "RideDetails", bundle: nil).instantiateViewController(withIdentifier: "rideDetailsController") as? RideDetailsViewController {
             controller.ride = ride
             navigationController?.pushViewController(controller, animated: true)
