@@ -41,6 +41,7 @@ class HopSkipDrive_TestTests: XCTestCase {
         try super.tearDownWithError()
     }
     
+    /* GETTING RIDE TEST DATA FROM JSON FILE */
     func getRideTestDataFromFile() -> String? {
         if let rideFile = Bundle.main.path(forResource: "ride_data", ofType: "json") {
             do {
