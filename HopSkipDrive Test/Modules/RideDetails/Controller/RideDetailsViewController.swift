@@ -183,14 +183,13 @@ extension RideDetailsViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
         let identifier = "identifier"
-        var color = UIColor(red: 4/255, green: 254/255, blue: 26/255, alpha: 1)
-        if let isPickUp = ride.orderedWaypoints?.filter({$0.location?.annotation?.title == annotation.title}).first?.anchor, !isPickUp {
-            color = UIColor(red: 255/255, green: 8/255, blue: 0/255, alpha: 1)
-        }
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-        annotationView.backgroundColor = color
-        annotationView.frame.size = CGSize(width: 20, height: 20)
-        annotationView.layer.cornerRadius = 10
+        let pinView = PinView(annotation: annotation,
+                              ride: ride,
+                              frame: CGRect(x: 0, y: 0,
+                                            width: 20,
+                                            height: 20))
+        annotationView.addSubview(pinView)
         return annotationView
     }
 }
