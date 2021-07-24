@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7727456A26ABC98700AD9D7F /* ride_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 7727456926ABC98700AD9D7F /* ride_data.json */; };
 		7727456C26ABDBC200AD9D7F /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7727456B26ABDBC200AD9D7F /* SplashView.swift */; };
+		7727456E26ABE90700AD9D7F /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7727456D26ABE90700AD9D7F /* UITableView+Extensions.swift */; };
 		7796E5A226A7B969008919E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5A126A7B969008919E8 /* AppDelegate.swift */; };
 		7796E5A426A7B969008919E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5A326A7B969008919E8 /* SceneDelegate.swift */; };
 		7796E5A626A7B969008919E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796E5A526A7B969008919E8 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 /* Begin PBXFileReference section */
 		7727456926ABC98700AD9D7F /* ride_data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ride_data.json; sourceTree = "<group>"; };
 		7727456B26ABDBC200AD9D7F /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		7727456D26ABE90700AD9D7F /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		7796E59E26A7B969008919E8 /* HopSkipDrive Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HopSkipDrive Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7796E5A126A7B969008919E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7796E5A326A7B969008919E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			children = (
 				7796E5E726A7EEC0008919E8 /* String+Extensions.swift */,
 				7796E5F626A8CDBE008919E8 /* Int+Extensions.swift */,
+				7727456D26ABE90700AD9D7F /* UITableView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				7796E5A226A7B969008919E8 /* AppDelegate.swift in Sources */,
 				7727456C26ABDBC200AD9D7F /* SplashView.swift in Sources */,
 				7796E5A426A7B969008919E8 /* SceneDelegate.swift in Sources */,
+				7727456E26ABE90700AD9D7F /* UITableView+Extensions.swift in Sources */,
 				7796E60826A92D1C008919E8 /* RideDetailTableViewCell.swift in Sources */,
 				7796E5F726A8CDBE008919E8 /* Int+Extensions.swift in Sources */,
 				7796E5F226A7F3BB008919E8 /* Location.swift in Sources */,

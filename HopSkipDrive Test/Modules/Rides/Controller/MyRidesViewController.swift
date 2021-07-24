@@ -60,6 +60,7 @@ extension MyRidesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        rides.isEmpty ? tableView.setEmptyMessage("No Trips\n\nSchedule trips to start\nearning money today!") : tableView.restore()
         return rides.count
     }
     
@@ -89,7 +90,30 @@ extension MyRidesViewController: MyRideTableViewCellDelegate {
     func showRideDetails(ride: Ride) {
         if let controller = UIStoryboard(name: "RideDetails", bundle: nil).instantiateViewController(withIdentifier: "rideDetailsController") as? RideDetailsViewController {
             controller.ride = ride
+            controller.delegate = self
             navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+}
+
+/* DELEGATE FUNCTION THAT REMOVES RIDES BASED ON TRIP ID, THIS IS WORKING BUT EACH TRIP ID IS UNFORNATELY THE SAME IN THE API CALL */
+extension MyRidesViewController: RideDetailsViewControllerDelegate {
+    func cancelRide(_ ride: Ride) {
+        for i in 0..<rides.count {
+            for j in 0..<rides[i].count where rides[i][j] == ride {
+                rides[i].remove(at: j)
+                if rides[i].isEmpty {
+                    rides.remove(at: i)
+                    ridesTableView.beginUpdates()
+                    ridesTableView.deleteSections(IndexSet(integer: i), with: .fade)
+                    ridesTableView.endUpdates()
+                } else {
+                    ridesTableView.beginUpdates()
+                    ridesTableView.deleteRows(at: [IndexPath(row: j, section: i)], with: .fade)
+                    ridesTableView.endUpdates()
+                }
+                return
+            }
         }
     }
 }

@@ -8,6 +8,10 @@
 import UIKit
 import MapKit
 
+protocol RideDetailsViewControllerDelegate: AnyObject {
+    func cancelRide(_ ride: Ride)
+}
+
 class RideDetailsViewController: UIViewController {
     
     @IBOutlet weak var detailsTableHeightAnchor: NSLayoutConstraint!
@@ -22,6 +26,7 @@ class RideDetailsViewController: UIViewController {
     @IBOutlet weak var seriesLabel: PaddingLabel!
     
     var ride: Ride!
+    weak var delegate: RideDetailsViewControllerDelegate?
     
     /* USED TO INCREASE THE HEIGHT OF TABLE VIEW TO FIT ITS CONTENT,
      THOUGHT IT WOULD BE BETTER UX */
@@ -108,9 +113,21 @@ class RideDetailsViewController: UIViewController {
         }
     }
     
-    /* FUNCTIONALITY TO CANCEL THE CURRENT TRIP */
+    /* FUNCTIONALITY TO CANCEL THE CURRENT TRIP, WE SHOW AN ALERT TO DOUBLE
+     CHECK WITH THE USER IF THIS IS WHAT THEY WISH TO DO */
     @IBAction func cancelTrip(_ sender: Any) {
-        
+        let alertView = UIAlertController(title: "Cancel Trip", message: "Are you sure you wish to cancel this trip?", preferredStyle: .actionSheet)
+        alertView.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.navigationController?.popViewController(animated: true)
+            self.delegate?.cancelRide(self.ride)
+        }))
+        alertView.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        present(alertView, animated: true, completion: nil)
+    }
+    
+    deinit {
+        print("DEINITTTTT")
     }
     
     /* FUNCTIONALITY TO CREATE THE BACK ARROW FOR THE NAVIGATION BAR */
