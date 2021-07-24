@@ -180,13 +180,13 @@
 			isa = PBXGroup;
 			children = (
 				7796E5FC26A917E8008919E8 /* RideDetails */,
-				7796E5D626A7C859008919E8 /* MyRides */,
+				7796E5D626A7C859008919E8 /* Rides */,
 				7796E5D426A7B9B1008919E8 /* Main */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		7796E5D626A7C859008919E8 /* MyRides */ = {
+		7796E5D626A7C859008919E8 /* Rides */ = {
 			isa = PBXGroup;
 			children = (
 				7796E5F326A89E30008919E8 /* Cell */,
@@ -194,7 +194,7 @@
 				7796E5D926A7E817008919E8 /* Controller */,
 				7796E5FB26A90B41008919E8 /* View */,
 			);
-			path = MyRides;
+			path = Rides;
 			sourceTree = "<group>";
 		};
 		7796E5D726A7E7EE008919E8 /* Controller */ = {
