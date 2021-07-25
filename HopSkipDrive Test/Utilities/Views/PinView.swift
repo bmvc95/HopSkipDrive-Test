@@ -15,7 +15,7 @@ class PinView: UIView {
     
     init(annotation: MKAnnotation, ride: Ride, frame: CGRect) {
         super.init(frame: frame)
-        anchor = ride.orderedWaypoints?
+        self.anchor = ride.orderedWaypoints?
             .filter({$0.location?.annotation?.title == annotation.title})
             .first?.anchor ?? false
         setupView()
@@ -37,5 +37,6 @@ class PinView: UIView {
         pinPulse.animationDuration = 1
         pinPulse.backgroundColor = pinColor.cgColor
         layer.insertSublayer(pinPulse, below: layer)
+        isUserInteractionEnabled = false
     }
 }

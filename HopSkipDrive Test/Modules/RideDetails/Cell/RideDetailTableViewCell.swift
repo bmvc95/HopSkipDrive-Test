@@ -8,18 +8,13 @@
 import UIKit
 import MapKit
 
-/* PROTOCOL TO INHERIT FOR SUBSCIBED INSTANCES */
-protocol RideDetailTableViewCellDelegate: AnyObject {
-    func goToPin(location: CLLocationCoordinate2D)
-}
-
 class RideDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var anchorLabel: UILabel!
     @IBOutlet weak var anchorImage: UIImageView!
     
-    weak var delegate: RideDetailTableViewCellDelegate?
+    weak var delegate: RideDetailDelegate?
     var detail: Waypoint! {
         didSet {
             updateView()
@@ -44,7 +39,7 @@ class RideDetailTableViewCell: UITableViewCell {
     
     /* FUNCTION THAT CALLS DELEGATE TO CENTER PIN ON MAP VIEW */
     @objc private func goToCoords() {
-        if let location = detail.location?.annotation?.coordinate {
+        if let location = detail.location?.annotation {
             delegate?.goToPin(location: location)
         }
     }

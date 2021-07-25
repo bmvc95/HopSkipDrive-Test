@@ -27,6 +27,7 @@ class RideDetailsViewController: UIViewController {
     
     var ride: Ride!
     weak var delegate: RideDetailsViewControllerDelegate?
+    var addressView: AddressView?
     
     /* USED TO INCREASE THE HEIGHT OF TABLE VIEW TO FIT ITS CONTENT,
      THOUGHT IT WOULD BE BETTER UX */
@@ -50,6 +51,7 @@ class RideDetailsViewController: UIViewController {
     /* FUNCTION THAT MARKS PINS ON THE MAP BASED ON WAYPOINT
      COORDINATES AND THEN CENTERS THE MAP ON PICK UP LOCATION */
     private func setupMapView() {
+        mapView.clipsToBounds = false
         mapView.showsUserLocation = true
         mapView.delegate = self
         if let waypoints = ride.orderedWaypoints {
@@ -126,10 +128,6 @@ class RideDetailsViewController: UIViewController {
         present(alertView, animated: true, completion: nil)
     }
     
-    deinit {
-        print("DEINITTTTT")
-    }
-    
     /* FUNCTIONALITY TO CREATE THE BACK ARROW FOR THE NAVIGATION BAR */
     private func createBackButton() {
         let button = UIButton(type: .custom)
@@ -143,6 +141,15 @@ class RideDetailsViewController: UIViewController {
     /* FUNCTIONALITY TO POP THE USER BACK TO THEIR RIDES VIEW */
     @objc private func goBack() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func deleteAddressView(complete: @escaping() -> ()) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.addressView?.alpha = 0
+        } completion: { [weak self] _ in
+            self?.addressView?.removeFromSuperview()
+            complete()
+        }
     }
 }
 
@@ -169,11 +176,21 @@ extension RideDetailsViewController: UITableViewDelegate, UITableViewDataSource 
 
 /* FUNCTIONALITY TO CENTER THE TAPPED ADDRESS ON THE MAP VIEW
 THIS WILL MAKE UX BETTER */
-extension RideDetailsViewController: RideDetailTableViewCellDelegate {
-    func goToPin(location: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-        let region = MKCoordinateRegion(center: location, span: span)
+extension RideDetailsViewController: RideDetailDelegate {
+    func goToPin(location: MKAnnotation) {
+        let span = MKCoordinateSpan(latitudeDelta: 0.01,
+                                    longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
         mapView.setRegion(region, animated: true)
+        if let address = location.title as? String {
+            deleteAddressView { [weak self] in
+                guard let self = self else { return }
+                let addressView = AddressView(frame: self.mapView.frame,
+                                              address: address)
+                self.addressView = addressView
+                self.mapView.addSubview(addressView)
+            }
+        }
     }
 }
 
@@ -184,12 +201,29 @@ extension RideDetailsViewController: MKMapViewDelegate {
         guard !annotation.isKind(of: MKUserLocation.self) else { return nil }
         let identifier = "identifier"
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        annotationView.frame.size = CGSize(width: 40, height: 40)
         let pinView = PinView(annotation: annotation,
                               ride: ride,
-                              frame: CGRect(x: 0, y: 0,
+                              frame: CGRect(x: 0,
+                                            y: 0,
                                             width: 20,
                                             height: 20))
         annotationView.addSubview(pinView)
+        annotationView.isUserInteractionEnabled = true
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let coords = view.annotation {
+            goToPin(location: coords)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        if mapView.regionChangeFromUserInteraction() {
+            deleteAddressView {}
+        }
+    }
 }
+
+
