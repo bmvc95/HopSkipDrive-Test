@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 extension String {
     
@@ -15,6 +16,25 @@ extension String {
             return dict
         }
         return nil
+    }
+    
+    /* I WROTE THIS BECAUSE IT SEEMS THE COORDINATES IN THE TEST API ARE OFF RELATIVE TO THE ACTUAL DROP OFF ADDRESS */
+    func coordsFromAddress(complete: @escaping(CLLocationCoordinate2D?) -> Void) {
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(self) { placemarks, error in
+            guard let placemarks = placemarks else {
+                if let error = error {
+                    print("ERROR: \(error)")
+                }
+                complete(nil)
+                return
+            }
+            if let coord = placemarks.first?.location?.coordinate {
+                complete(coord)
+            } else {
+                complete(nil)
+            }
+        }
     }
     
     /* FUNCTION THAT GETS THE HOURS, MINUTES AND TIME OF DAY AND RETURNS THE STRING */

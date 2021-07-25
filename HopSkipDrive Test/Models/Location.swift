@@ -31,6 +31,11 @@ extension Location {
            let address = location.address {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            location.address?.coordsFromAddress(complete: { coords in
+                if let coords = coords {
+                    annotation.coordinate = coords
+                }
+            })
             annotation.title = address
             location.annotation = annotation
         }

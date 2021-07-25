@@ -99,6 +99,7 @@ class RideDetailsViewController: UIViewController {
     
     /* SHOWS THE DIRECTIONS BETWEEN PICK UP AND DROP OFF LOCATIONS */
     @IBAction func showDirections(_ sender: Any) {
+        deleteAddressView { }
         if let waypoints = ride.orderedWaypoints {
             for i in 0..<waypoints.count where i < waypoints.count - 1 {
                 if let pickUp = waypoints[i].location?.annotation?.coordinate,

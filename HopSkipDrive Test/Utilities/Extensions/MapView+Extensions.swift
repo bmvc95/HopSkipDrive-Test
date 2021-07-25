@@ -22,19 +22,14 @@ extension MKMapView {
         return false
     }
     func showRoute(pickUp: CLLocationCoordinate2D, dropOff: CLLocationCoordinate2D) {
+//        let coordArray = [pickUp, dropOff]
+//        let polyline = MKPolyline(coordinates: coordArray, count: coordArray.count)
+//        addOverlay(polyline)
         let pickUpPlacemark = MKPlacemark(coordinate: pickUp)
         let dropOffPlacemark = MKPlacemark(coordinate: dropOff)
         let pickUpItem = MKMapItem(placemark: pickUpPlacemark)
         let dropOffItem = MKMapItem(placemark: dropOffPlacemark)
-        let pickUpAnnotation = MKPointAnnotation()
-        if let location = pickUpPlacemark.location {
-            pickUpAnnotation.coordinate = location.coordinate
-        }
-        let dropOffAnnotation = MKPointAnnotation()
-        if let location = dropOffPlacemark.location {
-            dropOffAnnotation.coordinate = location.coordinate
-        }
-        showAnnotations(annotations, animated: true)
+
         let directionRequest = MKDirections.Request()
         directionRequest.source = pickUpItem
         directionRequest.destination = dropOffItem
@@ -49,7 +44,7 @@ extension MKMapView {
                 return
             }
             let route = response.routes[0]
-            self.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
+            self.addOverlay((route.polyline), level: .aboveLabels)
             let rect = route.polyline.boundingMapRect
             self.setRegion(MKCoordinateRegion(rect), animated: true)
         }
