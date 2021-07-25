@@ -25,6 +25,7 @@ class RideDetailsViewController: UIViewController {
     @IBOutlet weak var tripIDLabel: PaddingLabel!
     @IBOutlet weak var seriesLabel: PaddingLabel!
     
+    @IBOutlet weak var showDirectionsButton: UIButton!
     var ride: Ride!
     weak var delegate: RideDetailsViewControllerDelegate?
     var addressView: AddressView?
@@ -96,8 +97,18 @@ class RideDetailsViewController: UIViewController {
         }
     }
     
-    /* FUNCTIONALITY THAT SETUPS UP THE HEADER VIEW UI WITH ITS
-     CORRESPONDING DATA */
+    /* SHOWS THE DIRECTIONS BETWEEN PICK UP AND DROP OFF LOCATIONS */
+    @IBAction func showDirections(_ sender: Any) {
+        if let waypoints = ride.orderedWaypoints {
+            for i in 0..<waypoints.count where i < waypoints.count - 1 {
+                if let pickUp = waypoints[i].location?.annotation?.coordinate,
+                   let dropOff = waypoints[i+1].location?.annotation?.coordinate {
+                    mapView.showRoute(pickUp: pickUp, dropOff: dropOff)
+                }
+            }
+        }
+    }
+    
     private func setupHeaderView() {
         if let date = ride.startsAt?.dateFromIso(format: "E MM/dd") {
             dateLabel.text = date
@@ -223,6 +234,13 @@ extension RideDetailsViewController: MKMapViewDelegate {
         if mapView.regionChangeFromUserInteraction() {
             deleteAddressView {}
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.systemTeal
+        renderer.lineWidth = 5
+        return renderer
     }
 }
 
