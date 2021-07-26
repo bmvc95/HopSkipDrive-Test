@@ -18,6 +18,25 @@ class PinPulse: CALayer {
         super.init(layer: layer)
     }
     
+    @objc func appEnterForeground() {
+        setupAnimations()
+    }
+    
+    @objc func appEnterBackground() {
+        removeAnimation(forKey: "pulse")
+    }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(appEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,12 +51,17 @@ class PinPulse: CALayer {
         self.position = position
         self.bounds = CGRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
         self.cornerRadius = radius
+        addObservers()
         DispatchQueue.global(qos: .default).async { [weak self] in
             self?.setupAnimationGroup()
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.add(self.animationGroup, forKey: "pulse")
-            }
+            self?.setupAnimations()
+        }
+    }
+    
+    private func setupAnimations() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.add(self.animationGroup, forKey: "pulse")
         }
     }
     
