@@ -53,7 +53,6 @@ extension MKMapView {
                 if let route = route {
                     self?.addOverlay(route.polyline)
                 }
-                print("route: \(route?.expectedTravelTime)")
                 waypoints.remove(at: closest.1)
                 waypoints.count == 1
                     ? loadingView.removeWithSlide()
