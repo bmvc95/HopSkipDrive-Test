@@ -16,7 +16,7 @@ class Location: Equatable {
     var address: String?
     var lat: Double?
     var long: Double?
-    var annotation: MKPointAnnotation?
+    var annotation: MKPointAnnotation!
 }
 
 extension Location {

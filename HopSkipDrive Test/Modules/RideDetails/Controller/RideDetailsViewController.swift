@@ -56,16 +56,7 @@ class RideDetailsViewController: UIViewController {
         mapView.showsUserLocation = true
         mapView.delegate = self
         if let waypoints = ride.orderedWaypoints {
-            for waypoint in waypoints {
-                if let annotation = waypoint.location?.annotation {
-                    mapView.addAnnotation(annotation)
-                }
-            }
-            if let pickUpCoord = waypoints.first?.location?.annotation?.coordinate {
-                let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                let region = MKCoordinateRegion(center: pickUpCoord, span: span)
-                mapView.setRegion(region, animated: true)
-            }
+            mapView.addAnnotations(waypoints: waypoints)
         }
     }
     
@@ -101,15 +92,15 @@ class RideDetailsViewController: UIViewController {
     @IBAction func showDirections(_ sender: Any) {
         deleteAddressView { }
         if let waypoints = ride.orderedWaypoints {
-            for i in 0..<waypoints.count where i < waypoints.count - 1 {
-                if let pickUp = waypoints[i].location?.annotation?.coordinate,
-                   let dropOff = waypoints[i+1].location?.annotation?.coordinate {
-                    mapView.showRoute(pickUp: pickUp, dropOff: dropOff)
-                }
+            mapView.addAnnotations(waypoints: waypoints)
+            if let pickUp = waypoints.filter({$0.anchor}).first?.location?.annotation?.coordinate {
+                let currentLocation = CLLocation(latitude: pickUp.latitude, longitude: pickUp.longitude)
+                mapView.showQuickestRoute(currentLocation: currentLocation, waypoints: waypoints)
             }
         }
     }
     
+    /* SETTING UP HEADER VIEW WITH TIME AND COST ATTRIBUTES */
     private func setupHeaderView() {
         if let date = ride.startsAt?.dateFromIso(format: "E MM/dd") {
             dateLabel.text = date
@@ -155,6 +146,7 @@ class RideDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    /* FUNCTION THAT DELETES THE ADDRESS VIEW WITH STYLE */
     private func deleteAddressView(complete: @escaping() -> ()) {
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.addressView?.alpha = 0
@@ -231,6 +223,7 @@ extension RideDetailsViewController: MKMapViewDelegate {
         }
     }
     
+    /* HIDES THE ADDRESS VIEW ON THE MAP TO GIVE USER BACK FULL VIEW ACCESS */
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         if mapView.regionChangeFromUserInteraction() {
             deleteAddressView {}

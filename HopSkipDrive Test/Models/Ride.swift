@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 class Ride: Equatable {
     
@@ -24,6 +25,15 @@ class Ride: Equatable {
 }
 
 extension Ride {
+//    func getRoutesFromPickup(complete: @escaping([MKRoute]) -> Void) {
+//        if let waypoints = orderedWaypoints {
+////            Api.Rides.routesFromPickUp(waypoints: waypoints) { routes in
+////                print("ROUTES: \(routes)")
+////            }
+//        } else {
+//            complete([])
+//        }
+//    }
     
     /* FUNCTION THAT RETURNS THE UNIQUE PASSENGERS BETWEEN THE WAYPOINTS OF
      A GIVEN TRIP, UNIQUE PASSENGERS ARE BASED OF ID */

@@ -9,6 +9,24 @@ import Foundation
 import MapKit
 
 extension MKMapView {
+    
+    /* FUNCTION TO ADD PICK UP AND DROP OFF PINS ON THE MAP */
+    func addAnnotations(waypoints: [Waypoint]) {
+        for waypoint in waypoints {
+            if let annotation = waypoint.location?.annotation {
+                addAnnotation(annotation)
+            }
+        }
+        if let pickUpCoord = waypoints.first?.location?.annotation?.coordinate {
+            let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+            let region = MKCoordinateRegion(center: pickUpCoord, span: span)
+            setRegion(region, animated: true)
+        }
+    }
+    
+    /* FUNCTION THAT DETERMINES WHEHER THE USER HAS MOVED THE MAP,
+     THIS IS TO PREVENT THE ADDRESS VIEW FROM DISAPPEARING WHEN SELECTINHG A
+     PIN OR TABLEVIEW CELL */
     func regionChangeFromUserInteraction() -> Bool {
         if let view = subviews.first {
             if let gestures = view.gestureRecognizers {
@@ -21,32 +39,26 @@ extension MKMapView {
         }
         return false
     }
-    func showRoute(pickUp: CLLocationCoordinate2D, dropOff: CLLocationCoordinate2D) {
-//        let coordArray = [pickUp, dropOff]
-//        let polyline = MKPolyline(coordinates: coordArray, count: coordArray.count)
-//        addOverlay(polyline)
-        let pickUpPlacemark = MKPlacemark(coordinate: pickUp)
-        let dropOffPlacemark = MKPlacemark(coordinate: dropOff)
-        let pickUpItem = MKMapItem(placemark: pickUpPlacemark)
-        let dropOffItem = MKMapItem(placemark: dropOffPlacemark)
-
-        let directionRequest = MKDirections.Request()
-        directionRequest.source = pickUpItem
-        directionRequest.destination = dropOffItem
-        directionRequest.transportType = .automobile
-        let directions = MKDirections(request: directionRequest)
-        directions.calculate { [weak self] response, error in
-            guard let self = self else { return }
-            guard let response = response else {
-                if let error = error {
-                    print("ERROR: \(error)")
-                }
-                return
+    
+    /* RECURSIVE FUNCTION THAT LISTS THE SHORTEST ROUTES BETWEEN WAYPOINTS TO
+     ENSURE THE CARE DRIVERS HAVE THE BEST EXPERIENCE, I USE TO DELIVER PIZZA'S
+     SO I KNOW THIS WOULD HELP */
+    func showQuickestRoute(currentLocation: CLLocation, waypoints: [Waypoint]) {
+        var waypoints = waypoints
+        var locations: [(CLLocation, Int)] = []
+        for i in 0..<waypoints.count where !waypoints[i].anchor {
+            if let coord = waypoints[i].location?.annotation.coordinate {
+                locations.append((CLLocation(latitude: coord.latitude, longitude: coord.longitude), i))
             }
-            let route = response.routes[0]
-            self.addOverlay((route.polyline), level: .aboveLabels)
-            let rect = route.polyline.boundingMapRect
-            self.setRegion(MKCoordinateRegion(rect), animated: true)
+        }
+        if let closest = locations.min(by: {$0.0.distance(from: currentLocation) < $1.0.distance(from: currentLocation)}) {
+            Api.Rides.getRoute(pickUp: currentLocation.coordinate, dropOff: closest.0.coordinate) { [weak self] route in
+                if let route = route {
+                    self?.addOverlay(route.polyline)
+                }
+                waypoints.remove(at: closest.1)
+                self?.showQuickestRoute(currentLocation: closest.0, waypoints: waypoints)
+            }
         }
     }
 }

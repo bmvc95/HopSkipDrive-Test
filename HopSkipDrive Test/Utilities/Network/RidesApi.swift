@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 class RidesApi {
     
@@ -74,4 +75,30 @@ class RidesApi {
         }
         return rides
     }
+    
+    /* FUNCTION THE GETS THE DRIVABLE ROUTE BETWEEN TWO POINTS */
+    func getRoute(pickUp: CLLocationCoordinate2D, dropOff: CLLocationCoordinate2D, complete: @escaping(MKRoute?) -> Void) {
+        let pickUpPlacemark = MKPlacemark(coordinate: pickUp)
+        let dropOffPlacemark = MKPlacemark(coordinate: dropOff)
+        let pickUpItem = MKMapItem(placemark: pickUpPlacemark)
+        let dropOffItem = MKMapItem(placemark: dropOffPlacemark)
+
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = pickUpItem
+        directionRequest.destination = dropOffItem
+        directionRequest.transportType = .automobile
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { response, _ in
+            guard let response = response else {
+                complete(nil)
+                return
+            }
+            if let route = response.routes.first {
+                complete(route)
+            } else {
+                complete(nil)
+            }
+        }
+    }
+    
 }

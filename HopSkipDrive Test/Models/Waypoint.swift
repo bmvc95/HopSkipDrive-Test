@@ -9,7 +9,7 @@ import Foundation
 
 class Waypoint {
     var id: Int?
-    var anchor: Bool?
+    var anchor: Bool = false
     var passengers: [Passenger]?
     var location: Location?
 }
