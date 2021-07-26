@@ -25,15 +25,19 @@ class Ride: Equatable {
 }
 
 extension Ride {
-//    func getRoutesFromPickup(complete: @escaping([MKRoute]) -> Void) {
-//        if let waypoints = orderedWaypoints {
-////            Api.Rides.routesFromPickUp(waypoints: waypoints) { routes in
-////                print("ROUTES: \(routes)")
-////            }
-//        } else {
-//            complete([])
-//        }
-//    }
+    
+    /* FUNCTION TO EXTRACT THE LOCATION DATA FROM EACH WAYPOINT AS A CORE LOCATION LOCATION OBJECT, THE INT IS TO KEEP TRACK OF ITS POSITION IN THE ARRAY */
+    func locationsFromWaypoints() -> [CLLocation] {
+        var locations: [CLLocation] = []
+        if let waypoints = orderedWaypoints {
+            for i in 0..<waypoints.count where !waypoints[i].anchor {
+                if let coord = waypoints[i].location?.annotation.coordinate {
+                    locations.append(CLLocation(latitude: coord.latitude, longitude: coord.longitude))
+                }
+            }
+        }
+        return locations
+    }
     
     /* FUNCTION THAT RETURNS THE UNIQUE PASSENGERS BETWEEN THE WAYPOINTS OF
      A GIVEN TRIP, UNIQUE PASSENGERS ARE BASED OF ID */

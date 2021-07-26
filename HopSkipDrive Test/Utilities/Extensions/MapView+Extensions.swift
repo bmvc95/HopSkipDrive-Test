@@ -14,8 +14,7 @@ extension MKMapView {
     func addAnnotations(waypoints: [Waypoint]) {
         var annotations: [MKAnnotation] = []
         for waypoint in waypoints {
-            if let annotation = waypoint.location?.annotation {
-                annotations.append(annotation)
+            if let annotation = waypoint.location?.annotation { annotations.append(annotation)
             }
         }
         showAnnotations(annotations, animated: true)
@@ -40,23 +39,19 @@ extension MKMapView {
     /* RECURSIVE FUNCTION THAT LISTS THE SHORTEST ROUTES BETWEEN WAYPOINTS TO
      ENSURE THE CARE DRIVERS HAVE THE BEST EXPERIENCE, I USE TO DELIVER PIZZA'S
      SO I KNOW THIS WOULD HELP */
-    func showQuickestRoute(loadingView: RouteLoadingView,currentLocation: CLLocation, waypoints: [Waypoint]) {
-        var waypoints = waypoints
-        var locations: [(CLLocation, Int)] = []
-        for i in 0..<waypoints.count where !waypoints[i].anchor {
-            if let coord = waypoints[i].location?.annotation.coordinate {
-                locations.append((CLLocation(latitude: coord.latitude, longitude: coord.longitude), i))
-            }
-        }
-        if let closest = locations.min(by: {$0.0.distance(from: currentLocation) < $1.0.distance(from: currentLocation)}) {
-            Api.Rides.getRoute(pickUp: currentLocation.coordinate, dropOff: closest.0.coordinate) { [weak self] route in
+    func showQuickestRoute(loadingView: RouteLoadingView, currentLocation: CLLocation, locations: [CLLocation]) {
+        var locations = locations
+        if let closest = locations.min(by: {$0.distance(from: currentLocation) < $1.distance(from: currentLocation)}) {
+            Api.Rides.getRoute(pickUp: currentLocation.coordinate, dropOff: closest.coordinate) { [weak self] route in
                 if let route = route {
                     self?.addOverlay(route.polyline)
                 }
-                waypoints.remove(at: closest.1)
-                waypoints.count == 1
+                if let index = locations.firstIndex(of: closest) {
+                    locations.remove(at: index)
+                }
+                locations.isEmpty
                     ? loadingView.removeWithSlide()
-                    : self?.showQuickestRoute(loadingView: loadingView, currentLocation: closest.0, waypoints: waypoints)
+                    : self?.showQuickestRoute(loadingView: loadingView, currentLocation: closest, locations: locations)
             }
         }
     }

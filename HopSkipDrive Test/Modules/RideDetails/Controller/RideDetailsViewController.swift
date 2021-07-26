@@ -97,7 +97,10 @@ class RideDetailsViewController: UIViewController {
                 let currentLocation = CLLocation(latitude: pickUp.latitude, longitude: pickUp.longitude)
                 let loading = RouteLoadingView(frame: UIScreen.main.bounds)
                 view.addSubview(loading)
-                mapView.showQuickestRoute(loadingView: loading, currentLocation: currentLocation, waypoints: waypoints)
+                mapView.showAnnotations(mapView.annotations, animated: true)
+                mapView.showQuickestRoute(loadingView: loading,
+                                          currentLocation: currentLocation,
+                                          locations: ride.locationsFromWaypoints())
             }
         }
     }
