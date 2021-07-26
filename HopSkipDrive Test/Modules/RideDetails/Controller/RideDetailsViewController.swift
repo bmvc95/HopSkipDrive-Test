@@ -92,10 +92,11 @@ class RideDetailsViewController: UIViewController {
     @IBAction func showDirections(_ sender: Any) {
         deleteAddressView { }
         if let waypoints = ride.orderedWaypoints {
-            mapView.addAnnotations(waypoints: waypoints)
             if let pickUp = waypoints.filter({$0.anchor}).first?.location?.annotation?.coordinate {
                 let currentLocation = CLLocation(latitude: pickUp.latitude, longitude: pickUp.longitude)
-                mapView.showQuickestRoute(currentLocation: currentLocation, waypoints: waypoints)
+                let loading = RouteLoadingView(frame: UIScreen.main.bounds)
+                view.addSubview(loading)
+                mapView.showQuickestRoute(loadingView: loading, currentLocation: currentLocation, waypoints: waypoints)
             }
         }
     }

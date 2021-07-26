@@ -12,16 +12,13 @@ extension MKMapView {
     
     /* FUNCTION TO ADD PICK UP AND DROP OFF PINS ON THE MAP */
     func addAnnotations(waypoints: [Waypoint]) {
+        var annotations: [MKAnnotation] = []
         for waypoint in waypoints {
             if let annotation = waypoint.location?.annotation {
-                addAnnotation(annotation)
+                annotations.append(annotation)
             }
         }
-        if let pickUpCoord = waypoints.first?.location?.annotation?.coordinate {
-            let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
-            let region = MKCoordinateRegion(center: pickUpCoord, span: span)
-            setRegion(region, animated: true)
-        }
+        showAnnotations(annotations, animated: true)
     }
     
     /* FUNCTION THAT DETERMINES WHEHER THE USER HAS MOVED THE MAP,
@@ -43,7 +40,7 @@ extension MKMapView {
     /* RECURSIVE FUNCTION THAT LISTS THE SHORTEST ROUTES BETWEEN WAYPOINTS TO
      ENSURE THE CARE DRIVERS HAVE THE BEST EXPERIENCE, I USE TO DELIVER PIZZA'S
      SO I KNOW THIS WOULD HELP */
-    func showQuickestRoute(currentLocation: CLLocation, waypoints: [Waypoint]) {
+    func showQuickestRoute(loadingView: RouteLoadingView,currentLocation: CLLocation, waypoints: [Waypoint]) {
         var waypoints = waypoints
         var locations: [(CLLocation, Int)] = []
         for i in 0..<waypoints.count where !waypoints[i].anchor {
@@ -58,8 +55,8 @@ extension MKMapView {
                 }
                 waypoints.remove(at: closest.1)
                 waypoints.count == 1
-                    ? ()
-                    : self?.showQuickestRoute(currentLocation: closest.0, waypoints: waypoints)
+                    ? loadingView.removeWithSlide()
+                    : self?.showQuickestRoute(loadingView: loadingView, currentLocation: closest.0, waypoints: waypoints)
             }
         }
     }

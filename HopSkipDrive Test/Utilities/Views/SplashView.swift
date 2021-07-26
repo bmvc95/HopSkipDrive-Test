@@ -20,20 +20,9 @@ class SplashView: UIView {
         UIView.animate(withDuration: 2, delay: 0, options: .curveEaseInOut) { [weak self] in
             self?.splashImage.alpha = 1
         } completion: { [weak self] complete in
-            self?.removeView()
+            self?.removeWithSlide()
         }
 
-    }
-    
-    /* REMOVES VIEW BY SLIDING DOWN AND SETTING ALPHA TO 0, VIEW IS DEALLOCATED AFTERWARDS */
-    private func removeView() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) { [weak self] in
-            guard let self = self else { return }
-            self.frame.origin.y += self.frame.height
-            self.alpha = 0
-        } completion: { [weak self] complete in
-            self?.removeFromSuperview()
-        }
     }
     
     required init?(coder: NSCoder) {

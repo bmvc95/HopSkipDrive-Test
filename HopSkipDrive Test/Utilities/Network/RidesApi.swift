@@ -90,7 +90,6 @@ class RidesApi {
         directionRequest.transportType = .automobile
         let directions = MKDirections(request: directionRequest)
         directions.calculate { response, _ in
-            print("RESPONSE:\(response)")
             guard let response = response else {
                 complete(nil)
                 return
