@@ -45,13 +45,16 @@ class PinView: UIView {
         pinPulse.animationDuration = 1
         pinPulse.backgroundColor = pinColor.cgColor
         layer.insertSublayer(pinPulse, below: layer)
-        isUserInteractionEnabled = false
+        createPassengerImages()
+    }
+    
+    private func createPassengerImages() {
         if !childImages.isEmpty {
             let childImageView = UIImageView(frame: CGRect(x: 2.5, y: 2.5, width: 25, height: 25))
             addSubview(childImageView)
             childImageView.contentMode = .scaleAspectFill
             childImageView.image = childImages.first
-            childImageView.layer.cornerRadius = 10
+            childImageView.layer.cornerRadius = childImageView.frame.width / 2
             childImageView.clipsToBounds = true
             if childImages.count > 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
