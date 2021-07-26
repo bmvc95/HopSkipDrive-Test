@@ -18,7 +18,7 @@ extension MKMapView {
             }
         }
         if let pickUpCoord = waypoints.first?.location?.annotation?.coordinate {
-            let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+            let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
             let region = MKCoordinateRegion(center: pickUpCoord, span: span)
             setRegion(region, animated: true)
         }
@@ -57,7 +57,9 @@ extension MKMapView {
                     self?.addOverlay(route.polyline)
                 }
                 waypoints.remove(at: closest.1)
-                self?.showQuickestRoute(currentLocation: closest.0, waypoints: waypoints)
+                waypoints.count == 1
+                    ? ()
+                    : self?.showQuickestRoute(currentLocation: closest.0, waypoints: waypoints)
             }
         }
     }

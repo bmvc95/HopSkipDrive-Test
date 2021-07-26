@@ -78,6 +78,7 @@ class RidesApi {
     
     /* FUNCTION THE GETS THE DRIVABLE ROUTE BETWEEN TWO POINTS */
     func getRoute(pickUp: CLLocationCoordinate2D, dropOff: CLLocationCoordinate2D, complete: @escaping(MKRoute?) -> Void) {
+        print("CALLLEDDDDDD")
         let pickUpPlacemark = MKPlacemark(coordinate: pickUp)
         let dropOffPlacemark = MKPlacemark(coordinate: dropOff)
         let pickUpItem = MKMapItem(placemark: pickUpPlacemark)
@@ -89,6 +90,7 @@ class RidesApi {
         directionRequest.transportType = .automobile
         let directions = MKDirections(request: directionRequest)
         directions.calculate { response, _ in
+            print("RESPONSE:\(response)")
             guard let response = response else {
                 complete(nil)
                 return
