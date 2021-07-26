@@ -91,6 +91,7 @@ class RideDetailsViewController: UIViewController {
     /* SHOWS THE DIRECTIONS BETWEEN PICK UP AND DROP OFF LOCATIONS */
     @IBAction func showDirections(_ sender: Any) {
         deleteAddressView { }
+        mapView.removeOverlays(mapView.overlays)
         if let waypoints = ride.orderedWaypoints {
             if let pickUp = waypoints.filter({$0.anchor}).first?.location?.annotation?.coordinate {
                 let currentLocation = CLLocation(latitude: pickUp.latitude, longitude: pickUp.longitude)
@@ -211,8 +212,8 @@ extension RideDetailsViewController: MKMapViewDelegate {
                               ride: ride,
                               frame: CGRect(x: 0,
                                             y: 0,
-                                            width: 20,
-                                            height: 20))
+                                            width: 30,
+                                            height: 30))
         annotationView.addSubview(pinView)
         annotationView.isUserInteractionEnabled = true
         return annotationView
